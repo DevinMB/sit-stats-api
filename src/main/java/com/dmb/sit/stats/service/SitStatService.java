@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class SitStatService {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private HashMap<String, List<Sit>> sitDataStore;
-    private HashMap<String, SensorData> lastSensorRead;
+    private HashMap<String, List<Sit>> sitDataStore = new HashMap<>();
+    private HashMap<String, SensorData> lastSensorRead = new HashMap<>();
 
     public void aggregateSitRecords(String message) {
         try {
@@ -63,7 +63,7 @@ public class SitStatService {
     }
 
     public SummaryDto getDeviceStats(String deviceId) {
-        return new SummaryDto(this.getDeviceSits(deviceId),this.getDeviceStatus(deviceId));
+        return new SummaryDto(this.getDeviceSits(deviceId), this.getDeviceStatus(deviceId));
     }
 
 

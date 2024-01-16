@@ -26,6 +26,9 @@ public class Sit {
         this.timeBucket = determineTimeBucket(startTimestamp);
     }
 
+    public Sit() {
+    }
+
     private String determineTimeBucket(Long timestamp) {
         ZonedDateTime detroitTime = Instant.ofEpochSecond(timestamp).atZone(ZoneId.of("America/Detroit"));
         int hour = detroitTime.getHour();
