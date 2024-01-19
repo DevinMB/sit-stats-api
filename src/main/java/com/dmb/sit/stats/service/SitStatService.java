@@ -3,6 +3,7 @@ package com.dmb.sit.stats.service;
 import com.dmb.sit.stats.model.SensorData;
 import com.dmb.sit.stats.model.Sit;
 import com.dmb.sit.stats.model.dto.SummaryDto;
+import com.dmb.sit.stats.util.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class SitStatService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private HashMap<String, List<Sit>> sitDataStore = new HashMap<>();
     private HashMap<String, SensorData> lastSensorRead = new HashMap<>();
+
+    private final Utils utils = new Utils();
 
     public void aggregateSitRecords(String message) {
         try {
@@ -50,14 +53,14 @@ public class SitStatService {
 
     public List<Sit> getDeviceSits(String deviceId) {
         if (!sitDataStore.containsKey(deviceId)) {
-            throw new IllegalArgumentException("Key not found: " + deviceId);
+            throw new IllegalArgumentException("Key not found for Device Sits: " + deviceId);
         }
         return sitDataStore.get(deviceId);
     }
 
     public SensorData getDeviceStatus(String deviceId) {
         if (!lastSensorRead.containsKey(deviceId)) {
-            throw new IllegalArgumentException("Key not found: " + deviceId);
+            return new SensorData(utils.getCurrentTimestamp(),deviceId,false);
         }
         return lastSensorRead.get(deviceId);
     }
