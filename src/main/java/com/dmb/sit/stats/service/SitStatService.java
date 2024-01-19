@@ -15,10 +15,9 @@ import java.util.List;
 @Service
 public class SitStatService {
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Utils utils = new Utils();
     private HashMap<String, List<Sit>> sitDataStore = new HashMap<>();
     private HashMap<String, SensorData> lastSensorRead = new HashMap<>();
-
-    private final Utils utils = new Utils();
 
     public void aggregateSitRecords(String message) {
         try {
@@ -46,9 +45,9 @@ public class SitStatService {
     }
 
     public void addStatus(String key, SensorData sensorData) {
-        if (!lastSensorRead.containsKey(key)) {
-            lastSensorRead.put(key, sensorData);
-        }
+        lastSensorRead.put(key, sensorData);
+
+
     }
 
     public List<Sit> getDeviceSits(String deviceId) {
@@ -60,7 +59,7 @@ public class SitStatService {
 
     public SensorData getDeviceStatus(String deviceId) {
         if (!lastSensorRead.containsKey(deviceId)) {
-            return new SensorData(utils.getCurrentTimestamp(),deviceId,false);
+            return new SensorData(utils.getCurrentTimestamp(), deviceId, false);
         }
         return lastSensorRead.get(deviceId);
     }

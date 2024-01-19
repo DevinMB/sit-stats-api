@@ -1,6 +1,7 @@
 package com.dmb.sit.stats.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
