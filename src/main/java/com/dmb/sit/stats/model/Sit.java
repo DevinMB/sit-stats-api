@@ -1,5 +1,6 @@
 package com.dmb.sit.stats.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,11 +13,23 @@ import java.time.ZonedDateTime;
 @Setter
 @NoArgsConstructor
 public class Sit {
+
+    @JsonProperty("start_timestamp")
     private Long startTimestamp;
+
+    @JsonProperty("end_timestamp")
     private Long endTimestamp;
+
+    @JsonProperty("device_id")
     private String deviceId;
+
+    @JsonProperty("sit_duration")
     private Long sitDuration;
+
+    @JsonProperty("time_bucket")
     private String timeBucket;
+
+    @JsonProperty("avg_value")
     private Long avgValue;
 
     public Sit(Long startTimestamp, Long endTimestamp, String deviceId, Long sitDuration, Long avgValue) {
