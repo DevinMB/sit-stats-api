@@ -1,8 +1,9 @@
 package com.dmb.sit.stats.model;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
 public class SensorData {
     private Long timestamp;
     private String deviceId;

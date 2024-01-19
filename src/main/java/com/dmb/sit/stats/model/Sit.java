@@ -1,6 +1,7 @@
 package com.dmb.sit.stats.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
@@ -9,6 +10,7 @@ import java.time.ZonedDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Sit {
     private Long startTimestamp;
     private Long endTimestamp;
@@ -24,9 +26,6 @@ public class Sit {
         this.sitDuration = sitDuration;
         this.avgValue = avgValue;
         this.timeBucket = determineTimeBucket(startTimestamp);
-    }
-
-    public Sit() {
     }
 
     private String determineTimeBucket(Long timestamp) {

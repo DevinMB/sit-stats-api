@@ -1,8 +1,10 @@
 package com.dmb.sit.stats.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SitCounter {
 
     private int morningSitCount;

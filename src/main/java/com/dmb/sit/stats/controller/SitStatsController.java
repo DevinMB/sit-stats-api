@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/sit-stats") // Base path for all endpoints in this controller
 public class SitStatsController {
@@ -24,4 +26,5 @@ public class SitStatsController {
     public SummaryDto getDeviceStats(@PathVariable String deviceId) {
         return sitStatService.getDeviceStats(deviceId);
     }
+
 }

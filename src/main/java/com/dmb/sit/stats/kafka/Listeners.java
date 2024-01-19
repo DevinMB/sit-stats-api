@@ -13,12 +13,12 @@ public class Listeners {
         this.sitStatService = myService;
     }
 
-    @KafkaListener(topics = "sit-topic", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "sit-topic", containerFactory = "kafkaListenerContainerFactoryNoAutoCommit")
     public void listenToSitTopic(String message) {
         sitStatService.aggregateSitRecords(message);
     }
 
-    @KafkaListener(topics = "raw-sit-topic", containerFactory = "kafkaListenerContainerFactoryNoAutoCommit")
+    @KafkaListener(topics = "raw-sit-topic", containerFactory = "kafkaListenerContainerFactory")
     public void listenToLiveSensorData(String message) {
         sitStatService.liveSitSensorRecords(message);
     }
