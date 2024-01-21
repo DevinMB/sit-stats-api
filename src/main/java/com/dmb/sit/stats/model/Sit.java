@@ -1,16 +1,15 @@
 package com.dmb.sit.stats.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
 public class Sit {
 
@@ -55,6 +54,5 @@ public class Sit {
             return "night";
         }
     }
-
 
 }

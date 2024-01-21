@@ -1,16 +1,13 @@
 package com.dmb.sit.stats.controller;
 
-
-import com.dmb.sit.stats.model.dto.SummaryDto;
 import com.dmb.sit.stats.service.SitStatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/sit-stats") // Base path for all endpoints in this controller
+@RequestMapping("/sit-stats")
 public class SitStatsController {
 
     private final SitStatService sitStatService;
@@ -20,9 +17,39 @@ public class SitStatsController {
         this.sitStatService = sitStatService;
     }
 
-    @GetMapping("/{deviceId}") // Maps to /sit-stats/{deviceId}
-    public SummaryDto getDeviceStats(@PathVariable String deviceId) {
-        return sitStatService.getDeviceStats(deviceId);
+    @GetMapping("/{deviceId}")
+    public ResponseEntity<?> getDeviceStats(@PathVariable String deviceId) {
+        try {
+            return ResponseEntity.ok(sitStatService.getDeviceStats(deviceId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
+
+    @GetMapping("/{deviceId}/status")
+    public ResponseEntity<?> getDeviceStatus(@PathVariable String deviceId) {
+        try {
+            return ResponseEntity.ok(sitStatService.getDeviceStatus(deviceId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{deviceId}/sits")
+    public ResponseEntity<?> getDeviceSits(@PathVariable String deviceId,
+                                           @RequestParam(required = false) Long startTimestamp,
+                                           @RequestParam(required = false) Long endTimestamp,
+                                           @RequestParam(required = false) Long minDuration,
+                                           @RequestParam(required = false) Long maxDuration,
+                                           @RequestParam(required = false) Long minAvgValue,
+                                           @RequestParam(required = false) Long maxAvgValue) {
+
+        try {
+            return ResponseEntity.ok(sitStatService.getDeviceSits(deviceId, startTimestamp, endTimestamp, minDuration, maxDuration, minAvgValue, maxAvgValue));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 
 }

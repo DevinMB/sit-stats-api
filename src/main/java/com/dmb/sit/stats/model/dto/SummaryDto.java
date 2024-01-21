@@ -4,7 +4,6 @@ import com.dmb.sit.stats.model.SensorData;
 import com.dmb.sit.stats.model.Sit;
 import com.dmb.sit.stats.model.SitCounter;
 import lombok.Data;
-import org.apache.kafka.common.metrics.Sensor;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -12,14 +11,15 @@ import java.util.List;
 @Data
 @ResponseBody
 public class SummaryDto {
+    private String deviceName;
     private Sit lastSit;
     private Sit maxSit;
     private SitCounter sitCounter;
     private Long totalSitTime;
-
     private SensorData lastSensorRead;
 
-    public SummaryDto(List<Sit> sits, SensorData sensorData) {
+    public SummaryDto(String deviceName, List<Sit> sits, SensorData sensorData) {
+        this.deviceName = deviceName;
         this.sitCounter = new SitCounter();
         this.totalSitTime = 0L;
         this.maxSit = null;
