@@ -60,8 +60,10 @@ public class SitStatService {
         return lastSensorRead.get(deviceId);
     }
 
-    public SummaryDto getDeviceStats(String deviceId) {
-        return new SummaryDto(deviceId, this.getDeviceSits(deviceId), this.getDeviceStatus(deviceId));
+    public SummaryDto getDeviceStats(String deviceId, Long startTimestamp, Long endTimestamp, Long minDuration, Long maxDuration, Long minAvgValue, Long maxAvgValue) {
+        return new SummaryDto(deviceId,
+                this.getDeviceSits(deviceId, startTimestamp, endTimestamp, minDuration, maxDuration, minAvgValue, maxAvgValue),
+                this.getDeviceStatus(deviceId));
     }
 
     public List<Sit> getDeviceSits(String deviceId) {
@@ -86,16 +88,16 @@ public class SitStatService {
             sitStream = sitStream.filter(sit -> sit.getEndTimestamp() <= endTimestamp);
         }
         if (minDuration != null) {
-            sitStream = sitStream.filter(sit -> sit.getSitDuration() >= minDuration);
+            sitStream = sitStream.filter(sit -> sit.getSitDuration() != null && sit.getSitDuration() >= minDuration);
         }
         if (maxDuration != null) {
-            sitStream = sitStream.filter(sit -> sit.getSitDuration() <= maxDuration);
+            sitStream = sitStream.filter(sit -> sit.getSitDuration() != null && sit.getSitDuration() <= maxDuration);
         }
         if (minAvgValue != null) {
-            sitStream = sitStream.filter(sit -> sit.getAvgValue() >= minAvgValue);
+            sitStream = sitStream.filter(sit -> sit.getAvgValue() != null && sit.getAvgValue() >= minAvgValue);
         }
         if (maxAvgValue != null) {
-            sitStream = sitStream.filter(sit -> sit.getAvgValue() <= maxAvgValue);
+            sitStream = sitStream.filter(sit -> sit.getAvgValue() != null && sit.getAvgValue() <= maxAvgValue);
         }
 
         return sitStream.collect(Collectors.toList());

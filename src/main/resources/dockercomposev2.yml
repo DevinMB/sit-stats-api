@@ -12,16 +12,17 @@ services:
     container_name: sit-stats-api-container
     environment:
       - TZ=America/Detroit
+      - RELEASE_VERSION=${RELEASE_VERSION}
     networks:
       - alpine-net
     entrypoint: |
       /bin/sh -c "
       apk add --no-cache python3 py3-pip git wget;
       apk --no-cache add openjdk17-jre-headless;
-      if [ ! -f /data/sit.stats-1.2.0-SNAPSHOT.jar ]; then
-        wget -O /data/sit.stats-1.2.0-SNAPSHOT.jar https://github.com/DevinMB/sit-stats-api/releases/download/v1.2/sit.stats-1.2.0-SNAPSHOT.jar;
+      if [ ! -f /data/data/sit.stats-${RELEASE_VERSION}.0-SNAPSHOT.jar ]; then
+        wget -O /data/sit.stats-${RELEASE_VERSION}.0-SNAPSHOT.jar https://github.com/DevinMB/sit-stats-api/releases/download/v${RELEASE_VERSION}/sit.stats-${RELEASE_VERSION}.0-SNAPSHOT.jar;
       fi
-      java -jar /data/sit.stats-1.2.0-SNAPSHOT.jar;
+      java -jar /data/sit.stats-${RELEASE_VERSION}.0-SNAPSHOT.jar;
       "
 
 networks:

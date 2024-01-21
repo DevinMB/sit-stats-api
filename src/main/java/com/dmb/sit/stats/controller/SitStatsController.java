@@ -18,9 +18,15 @@ public class SitStatsController {
     }
 
     @GetMapping("/{deviceId}")
-    public ResponseEntity<?> getDeviceStats(@PathVariable String deviceId) {
+    public ResponseEntity<?> getDeviceStats(@PathVariable String deviceId,
+                                            @RequestParam(required = false) Long startTimestamp,
+                                            @RequestParam(required = false) Long endTimestamp,
+                                            @RequestParam(required = false) Long minDuration,
+                                            @RequestParam(required = false) Long maxDuration,
+                                            @RequestParam(required = false) Long minAvgValue,
+                                            @RequestParam(required = false) Long maxAvgValue) {
         try {
-            return ResponseEntity.ok(sitStatService.getDeviceStats(deviceId));
+            return ResponseEntity.ok(sitStatService.getDeviceStats(deviceId, startTimestamp, endTimestamp, minDuration, maxDuration, minAvgValue, maxAvgValue));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
