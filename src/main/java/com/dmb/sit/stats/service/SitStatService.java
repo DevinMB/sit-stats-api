@@ -103,5 +103,9 @@ public class SitStatService {
         return sitStream.collect(Collectors.toList());
     }
 
+    public List<String> getDevices(){
+        return new ArrayList<>(sitDataStore.keySet());
+    }
+
 
 }

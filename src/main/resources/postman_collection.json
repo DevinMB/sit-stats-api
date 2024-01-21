@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "03c7cb3f-7f04-4534-95da-acc45d5a75e5",
+		"name": "Sit Stats Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11048948"
+	},
+	"item": [
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/sit-stats/chair-sensor-1/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"chair-sensor-1",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/sit-stats/devices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/sit-stats/chair-sensor-1/sits?maxAvgValue=-1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"chair-sensor-1",
+								"sits"
+							],
+							"query": [
+								{
+									"key": "startTimestamp",
+									"value": "1705845762",
+									"disabled": true
+								},
+								{
+									"key": "endTimestamp",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "minDuration",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "maxDuration",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "minAvgValue",
+									"value": "-1000",
+									"disabled": true
+								},
+								{
+									"key": "maxAvgValue",
+									"value": "-1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sit-stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/sit-stats/chair-sensor-1?maxAvgValue=-1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"chair-sensor-1"
+							],
+							"query": [
+								{
+									"key": "startTimestamp",
+									"value": "1705845762",
+									"disabled": true
+								},
+								{
+									"key": "endTimestamp",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "minDuration",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "maxDuration",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "minAvgValue",
+									"value": "-1000",
+									"disabled": true
+								},
+								{
+									"key": "maxAvgValue",
+									"value": "-1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "portainer",
+			"item": [
+				{
+					"name": "status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.250:5001/sit-stats/{{deviceId}}/status",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"250"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"{{deviceId}}",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.250:5001/sit-stats/devices",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"250"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.250:5001/sit-stats/{{deviceId}}/sits",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"250"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"{{deviceId}}",
+								"sits"
+							],
+							"query": [
+								{
+									"key": "startTimestamp",
+									"value": "1705845762",
+									"description": "epoch",
+									"disabled": true
+								},
+								{
+									"key": "endTimestamp",
+									"value": "",
+									"description": "epoch",
+									"disabled": true
+								},
+								{
+									"key": "minDuration",
+									"value": "2",
+									"description": "seconds",
+									"disabled": true
+								},
+								{
+									"key": "maxDuration",
+									"value": "15",
+									"description": "seconds",
+									"disabled": true
+								},
+								{
+									"key": "minAvgValue",
+									"value": "-1000",
+									"disabled": true
+								},
+								{
+									"key": "maxAvgValue",
+									"value": "-5000",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sit-stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.1.250:5001/sit-stats/{{deviceId}}?maxAvgValue=-1000",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"250"
+							],
+							"port": "5001",
+							"path": [
+								"sit-stats",
+								"{{deviceId}}"
+							],
+							"query": [
+								{
+									"key": "startTimestamp",
+									"value": "1705845762",
+									"description": "epoch",
+									"disabled": true
+								},
+								{
+									"key": "endTimestamp",
+									"value": "",
+									"description": "epoch",
+									"disabled": true
+								},
+								{
+									"key": "minDuration",
+									"value": "2",
+									"description": "seconds",
+									"disabled": true
+								},
+								{
+									"key": "maxDuration",
+									"value": "15",
+									"description": "seconds",
+									"disabled": true
+								},
+								{
+									"key": "minAvgValue",
+									"value": "-1000",
+									"disabled": true
+								},
+								{
+									"key": "maxAvgValue",
+									"value": "-1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
