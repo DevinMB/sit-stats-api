@@ -49,31 +49,38 @@ public class Sit {
             return "night";
         }
     }
+
     @JsonProperty("startTimestamp")
     public Long getStartTimestamp() {
         return startTimestamp;
     }
+
     @JsonProperty("start_timestamp")
     public void setStartTimestamp(Long startTimestamp) {
         this.startTimestamp = startTimestamp;
     }
+
     @JsonProperty("endTimestamp")
     public Long getEndTimestamp() {
         return endTimestamp;
     }
+
     @JsonProperty("end_timestamp")
     public void setEndTimestamp(Long endTimestamp) {
         this.endTimestamp = endTimestamp;
     }
+
     @JsonProperty("deviceId")
     @JsonIgnore
     public String getDeviceId() {
         return deviceId;
     }
+
     @JsonProperty("device_id")
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
+
     @JsonProperty("sitDuration")
     public Long getSitDuration() {
         return sitDuration;
@@ -88,6 +95,7 @@ public class Sit {
     public String getTimeBucket() {
         return timeBucket;
     }
+
     @JsonProperty("time_bucket")
     public void setTimeBucket(String timeBucket) {
         this.timeBucket = timeBucket;
@@ -98,6 +106,7 @@ public class Sit {
     public Long getAvgValue() {
         return avgValue;
     }
+
     @JsonProperty("avg_value")
     public void setAvgValue(Long avgValue) {
         this.avgValue = avgValue;
