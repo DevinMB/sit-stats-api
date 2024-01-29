@@ -1,11 +1,15 @@
 package com.dmb.sit.stats.service;
 
+import com.dmb.sit.stats.controller.DeviceStatusWebSocketController;
 import com.dmb.sit.stats.exception.DeviceNotFoundException;
+import com.dmb.sit.stats.model.DeviceStatus;
 import com.dmb.sit.stats.model.SensorData;
 import com.dmb.sit.stats.model.Sit;
 import com.dmb.sit.stats.model.dto.SummaryDto;
 import com.dmb.sit.stats.util.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,10 +21,13 @@ import java.util.stream.Stream;
 
 @Service
 public class SitStatService {
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Utils utils = new Utils();
     private HashMap<String, List<Sit>> sitDataStore = new HashMap<>();
-    private HashMap<String, SensorData> lastSensorRead = new HashMap<>();
+    private HashMap<String, DeviceStatus> deviceStatusStore = new HashMap<>();
 
     public void aggregateSitRecords(String message) {
         try {
@@ -31,13 +38,20 @@ public class SitStatService {
         }
     }
 
-    public void liveSitSensorRecords(String message) {
-        try {
-            SensorData sensorData = objectMapper.readValue(message, SensorData.class);
-            addStatus(sensorData.getDeviceId(), sensorData);
-        } catch (IOException e) {
+    public void updateDeviceStatus(String message){
+        try{
+            DeviceStatus deviceStatus = objectMapper.readValue(message, DeviceStatus.class);
+            deviceStatusStore.put(deviceStatus.getDeviceId(),deviceStatus);
+            eventPublisher.publishEvent(new DeviceStatusUpdatedEvent(this, deviceStatus));
+        }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public List<DeviceStatus> getDevices() {
+        List<DeviceStatus> devices = new ArrayList<>();
+        devices.addAll(deviceStatusStore.values());
+        return devices;
     }
 
     public void addSit(String key, Sit sit) {
@@ -47,23 +61,9 @@ public class SitStatService {
         sitDataStore.get(key).add(sit);
     }
 
-    public void addStatus(String key, SensorData sensorData) {
-        lastSensorRead.put(key, sensorData);
-
-
-    }
-
-    public SensorData getDeviceStatus(String deviceId) {
-        if (!lastSensorRead.containsKey(deviceId)) {
-            return new SensorData(utils.getCurrentTimestamp(), deviceId, false);
-        }
-        return lastSensorRead.get(deviceId);
-    }
-
     public SummaryDto getDeviceStats(String deviceId, Long startTimestamp, Long endTimestamp, Long minDuration, Long maxDuration, Long minAvgValue, Long maxAvgValue) {
         return new SummaryDto(deviceId,
-                this.getDeviceSits(deviceId, startTimestamp, endTimestamp, minDuration, maxDuration, minAvgValue, maxAvgValue),
-                this.getDeviceStatus(deviceId));
+                this.getDeviceSits(deviceId, startTimestamp, endTimestamp, minDuration, maxDuration, minAvgValue, maxAvgValue));
     }
 
     public List<Sit> getDeviceSits(String deviceId) {
@@ -103,9 +103,7 @@ public class SitStatService {
         return sitStream.collect(Collectors.toList());
     }
 
-    public List<String> getDevices(){
-        return new ArrayList<>(sitDataStore.keySet());
-    }
+
 
 
 }

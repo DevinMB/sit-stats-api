@@ -18,8 +18,8 @@ public class Listeners {
         sitStatService.aggregateSitRecords(message);
     }
 
-    @KafkaListener(topics = "raw-sit-topic", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "device-status", containerFactory = "kafkaListenerContainerFactoryNoAutoCommit")
     public void listenToLiveSensorData(String message) {
-        sitStatService.liveSitSensorRecords(message);
+        sitStatService.updateDeviceStatus(message);
     }
 }

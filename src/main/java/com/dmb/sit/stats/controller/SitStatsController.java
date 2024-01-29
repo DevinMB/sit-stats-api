@@ -35,14 +35,14 @@ public class SitStatsController {
         }
     }
 
-    @GetMapping("/{deviceId}/status")
-    public ResponseEntity<?> getDeviceStatus(@PathVariable String deviceId) {
-        try {
-            return ResponseEntity.ok(sitStatService.getDeviceStatus(deviceId));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
+//    @GetMapping("/{deviceId}/status")
+//    public ResponseEntity<?> getDeviceStatus(@PathVariable String deviceId) {
+//        try {
+//            return ResponseEntity.ok(sitStatService.getDeviceStatus(deviceId));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//        }
+//    }
 
     @GetMapping("/{deviceId}/sits")
     public ResponseEntity<?> getDeviceSits(@PathVariable String deviceId,
@@ -60,13 +60,13 @@ public class SitStatsController {
         }
     }
 
-    @GetMapping("/devices")
-    public ResponseEntity<?> getDevices(){
-        try {
-            return ResponseEntity.ok(sitStatService.getDevices());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
+//    @GetMapping("/devices")
+//    public ResponseEntity<?> getDevices(){
+//        try {
+//            return ResponseEntity.ok(sitStatService.getDevices());
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//        }
+//    }
 
 }

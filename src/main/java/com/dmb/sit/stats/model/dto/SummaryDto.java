@@ -18,13 +18,12 @@ public class SummaryDto {
     private Long totalSitTime;
     private SensorData lastSensorRead;
 
-    public SummaryDto(String deviceName, List<Sit> sits, SensorData sensorData) {
+    public SummaryDto(String deviceName, List<Sit> sits) {
         this.deviceName = deviceName;
         this.sitCounter = new SitCounter();
         this.totalSitTime = 0L;
         this.maxSit = null;
         this.lastSit = null;
-        this.lastSensorRead = sensorData;
 
         if (sits != null && !sits.isEmpty()) {
             this.maxSit = sits.get(0);

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.dmb'
-version = '1.5.0-SNAPSHOT'
+version = '2.0.0-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
 //    implementation 'org.apache.kafka:kafka-streams'
     implementation 'org.springframework.kafka:spring-kafka'
     compileOnly 'org.projectlombok:lombok'
