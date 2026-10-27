@@ -1,0 +1,19 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write       # the gate merges Dependabot PRs
+  pull-requests: write  # ...and labels majors
+  packages: write       # push to GHCR on main
+  actions: write        # the gate starts the main build after merging
+jobs:
+  ci:
+    uses: DevinMB/workflows/.github/workflows/app-ci.yml@main
+    with:
+      image: ghcr.io/devinmb/sit-stats-api
+      # The tests run in the Dockerfile's build stage (gradle test).
+      # No broker in CI: the app starts and its listeners retry in the background.
+      smoke-env: SPRING_KAFKA_BOOTSTRAP_SERVERS=127.0.0.1:9
